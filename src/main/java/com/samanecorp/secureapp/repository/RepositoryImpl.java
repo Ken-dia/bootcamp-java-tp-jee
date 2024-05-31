@@ -17,6 +17,7 @@ public class RepositoryImpl<T> implements Repository<T> {
     @Override
     public boolean add(T t) {
         try {
+        	
             transaction = session.beginTransaction();
             session.save(t);
             transaction.commit();

@@ -1,6 +1,8 @@
 package com.samanecorp.secureapp.controller;
 
 import java.io.IOException;
+
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,12 +24,10 @@ public class SingUpServlet extends HttpServlet {
     private static final Logger logger = LoggerFactory.getLogger(LoginServlet.class);
     private LoginService loginService;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public SingUpServlet() {
-        super();
-        // TODO Auto-generated constructor stub
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+
+        loginService = new LoginService();
     }
 
 	/**

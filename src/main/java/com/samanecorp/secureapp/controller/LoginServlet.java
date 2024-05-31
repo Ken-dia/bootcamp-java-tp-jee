@@ -3,11 +3,13 @@ package com.samanecorp.secureapp.controller;
 import java.io.IOException;
 import java.util.Optional;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,15 +26,13 @@ public class LoginServlet extends HttpServlet {
 	private LoginService loginService;
     Logger logger = LoggerFactory.getLogger(LoginServlet.class);
 	private final String LOGIN_PAGE = "index.jsp";
-	private final String HOME_PAGE = "WEB-INF/jsp/welcome.jsp";
+	//private final String HOME_PAGE = "WEB-INF/jsp/welcome.jsp";
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public LoginServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	 @Override
+	    public void init(ServletConfig config) throws ServletException {
+
+	        loginService = new LoginService();
+	    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -53,8 +53,13 @@ public class LoginServlet extends HttpServlet {
         try {
             Optional<UserDTO> userDtoOption = loginService.loginUser(email,password);
             UserDTO userDto = userDtoOption.get();
-            request.getSession().setAttribute("username", userDto.getEmail());
-            response.sendRedirect(HOME_PAGE);
+            String username = userDto.getFirstName();
+            logger.info("info de username session {}",username);
+            HttpSession session = request.getSession();
+
+            session.setAttribute("nom", userDto.getLastName());
+            session.setAttribute("prenom", userDto.getFirstName());
+            response.sendRedirect("welcome");
         }  catch (Exception e) {
             String message = "informations de connexion incorrect.";
             logger.error("{}", message);

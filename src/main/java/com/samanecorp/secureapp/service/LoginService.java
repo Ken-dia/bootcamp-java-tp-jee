@@ -16,7 +16,7 @@ import com.samanecorp.secureapp.repository.RepositoryImpl;
 public class LoginService {
 	private static Logger logger = LoggerFactory.getLogger(LoginService.class);
 
-    private Repository<UserEntity> repository = new RepositoryImpl<UserEntity>();
+	 private Repository<UserEntity> repository = new RepositoryImpl<UserEntity>();
 
     private LoginDao loginDao = new LoginDao();
     // login d authentication
@@ -33,8 +33,9 @@ public class LoginService {
     }
     // Enregistrer un utilisateur
     public boolean saveUser(UserDTO userDto) {
-    	
-        return repository.add(UserMapper.userDtoToUserEntity(userDto));
+    	UserEntity user = UserMapper.userDtoToUserEntity(userDto);
+    	logger.info("user {} {} {} {}", user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword());
+    	 return repository.add(user);
     }
 
 }

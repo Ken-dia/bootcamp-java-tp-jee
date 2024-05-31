@@ -9,35 +9,40 @@
 		<link href="public/css/style.css" rel="stylesheet" type='text/css'>
 	</head>
 	<body>
-        <div class="container">
-		 	<div class="frame">
-			    <div class="nav">
-			    	<ul class"links">
-				        <li class="signin-active"><a class="btn">Se connecter</a></li>
-			      	</ul>
-		    	</div>
-	    		<div>
-	                <form class="form-signin" action="" method="post" name="form">
-		          		<label for="fullname">Prénom</label>
-				        <input class="form-styling" type="text" name="first_name" placeholder=""/>
-				        <label for="fullname">Nom</label>
-				        <input class="form-styling" type="text" name="last_name" placeholder=""/>
-				        <label for="email">Email</label>
-				        <input class="form-styling" type="text" name="email" placeholder=""/>
-				        <label for="password">Password</label>
-				        <input class="form-styling" type="text" name="password" placeholder=""/>
-				        <label for="confirmpassword">Confirm password</label>
-				        <input class="form-styling" type="text" name="confirmpassword" placeholder=""/>
-				        <div class="btn-animate">
-		            		<a class="btn-signin">se connecter</a>
-		          		</div>
-				        
-	                </form>
-      			</div>
-			    
-      
-  			</div>
+      <div class="login-wrap">
+    <div class="login-html">
+        <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Inscription</label>
+        <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab"></label>
+        <div class="login-form">
+            <form class="sign-in-htm" method="post" action="">
+                <div class="group">
+                    <label for="user" class="label">Prénom</label>
+                    <input id="first_name" type="text" class="input" name="first_name" placeholder="Entrer votre prénom">
+                </div>
+                <div class="group">
+                    <label for="user" class="label">Nom</label>
+                    <input id="last_name" type="text" class="input" name="last_name" placeholder="Entrer votre nom">
+                </div>
+                <div class="group">
+                    <label for="user" class="label">Email</label>
+                    <input id="user" type="text" class="input" name="email" placeholder="Entrer votre email">
+                </div>
+                <div class="group">
+                    <label for="pass" class="label">Mot de passe</label>
+                    <input id="pass" type="password" class="input" data-type="password" name="password" placeholder="Entrer votre mot de passe">
+                </div>
 
-		</div>
+                <div class="group">
+                    <input type="submit" class="button" value="Créer un compte">
+                </div>
+
+                <div class="hr"></div>
+                <div class="foot-lnk">
+                    <a href="login">j'ai déjà un compte</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 	</body>
 </html>
