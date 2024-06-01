@@ -32,7 +32,7 @@
 
                 <div class="hr"></div>
                 <div class="foot-lnk">
-                    <a href="singup">Créer un compte</a>
+                    <a href="signup">Créer un compte</a>
                 </div>
             </form>
         </div>

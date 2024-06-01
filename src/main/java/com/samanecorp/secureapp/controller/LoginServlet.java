@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import com.samanecorp.secureapp.dto.UserDTO;
 import com.samanecorp.secureapp.service.LoginService;
 
+
 /**
  * Servlet implementation class LoginServlet
  */
@@ -53,12 +54,10 @@ public class LoginServlet extends HttpServlet {
         try {
             Optional<UserDTO> userDtoOption = loginService.loginUser(email,password);
             UserDTO userDto = userDtoOption.get();
-            String username = userDto.getFirstName();
-            logger.info("info de username session {}",username);
+            
             HttpSession session = request.getSession();
 
-            session.setAttribute("nom", userDto.getLastName());
-            session.setAttribute("prenom", userDto.getFirstName());
+            session.setAttribute("username", userDto.getLastName());
             response.sendRedirect("welcome");
         }  catch (Exception e) {
             String message = "informations de connexion incorrect.";

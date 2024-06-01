@@ -8,17 +8,19 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.samanecorp.secureapp.entities.UserEntity;
+import com.samanecorp.secureapp.filter.PasswordUtil;
 import com.samanecorp.secureapp.hibernate.HibernateUtil;
 
 
 public class LoginDao {
 	 Logger logger = LoggerFactory.getLogger(LoginDao.class);
 	 
-	 public Optional<UserEntity> loginUser (String email, String pwd) {
+	 public Optional<UserEntity> login(String email, String pwd) {
 	        UserEntity result = null;
 	        Session session = HibernateUtil.getSessionFactory().openSession();
 
@@ -42,6 +44,26 @@ public class LoginDao {
 	            session.close();
 	        }
 	        return Optional.ofNullable(result);
+	    }
+	 public Optional<UserEntity> loginUser(String email, String password) {
+	        UserEntity userEntity = null;
+	        Transaction transaction = null;
+	        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+	            transaction = session.beginTransaction();
+	            userEntity = (UserEntity) session.createQuery("SELECT u FROM UserEntity u WHERE u.email = :email")
+	                    .setParameter("email", email)
+	                    .uniqueResult();
+	            if (userEntity != null && PasswordUtil.checkPassword(password, userEntity.getPassword())) {
+	                return Optional.ofNullable(userEntity);
+	            }
+	            transaction.commit();
+	        } catch (Exception e) {
+	            if (transaction != null) {
+	                //	transaction.rollback();
+	            }
+	            logger.error("Error ", e);
+	        }
+	        return Optional.ofNullable(userEntity);
 	    }
 
 }

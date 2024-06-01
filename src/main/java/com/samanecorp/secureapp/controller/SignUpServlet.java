@@ -18,8 +18,8 @@ import com.samanecorp.secureapp.service.LoginService;
 /**
  * Servlet implementation class SingUpServlet
  */
-@WebServlet(name = "singup", value = "/singup")
-public class SingUpServlet extends HttpServlet {
+@WebServlet(name = "signup", value = "/signup")
+public class SignUpServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private static final Logger logger = LoggerFactory.getLogger(LoginServlet.class);
     private LoginService loginService;

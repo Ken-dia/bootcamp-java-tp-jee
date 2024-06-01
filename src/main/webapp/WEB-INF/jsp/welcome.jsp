@@ -28,8 +28,8 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link mx-2 dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      	<c:if test="${ !empty sessionScope.prenom && !empty sessionScope.nom }">
-        					<div> ${ sessionScope.prenom } ${ sessionScope.nom } !</div>
+                      	<c:if test="${ !empty sessionScope.username }">
+        					<div> ${ sessionScope.username } !</div>
     					</c:if>
     					user
                     </a>

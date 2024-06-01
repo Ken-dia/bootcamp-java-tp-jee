@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.samanecorp.secureapp.filter.PasswordUtil;
+
 @Entity
 @Table(name="users")
 public class UserEntity implements Serializable {
@@ -58,7 +60,7 @@ public class UserEntity implements Serializable {
 	    }
 
 	    public void setPassword(String password) {
-	        this.password = password;
+	        this.password = PasswordUtil.hashPassword(password);
 	    }
 
 	    public Long getId() {
